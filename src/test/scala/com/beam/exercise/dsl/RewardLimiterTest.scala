@@ -32,12 +32,12 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(reward, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(2), now) returns 0
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(3), now) returns 1
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(1), now) returns 0
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(1), now) returns 1
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Completed
+        actual.status shouldEqual Completed()
       }
     }
 
@@ -46,12 +46,12 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(reward, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(2), now) returns 0
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(3), now) returns 10
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(1), now) returns 0
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(1), now) returns 10
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Limited
+        actual.status shouldEqual Limited()
       }
     }
 
@@ -60,12 +60,12 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(reward, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(2), now) returns 10
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(3), now) returns 0
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(1), now) returns 10
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(1), now) returns 0
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Limited
+        actual.status shouldEqual Limited()
       }
     }
 
@@ -74,12 +74,12 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(reward, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(2), now) returns 10
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(3), now) returns 10
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(1), now) returns 10
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(1), now) returns 10
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Limited
+        actual.status shouldEqual Limited()
       }
     }
 
@@ -94,11 +94,11 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(twiceADay, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(2), now) returns 0
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(1), now) returns 0
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Completed
+        actual.status shouldEqual Completed()
       }
     }
 
@@ -107,11 +107,11 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(thriceAWeek, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(3), now) returns 1
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(1), now) returns 1
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Completed
+        actual.status shouldEqual Completed()
       }
     }
 
@@ -120,11 +120,11 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(thriceAWeek, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(3), now) returns 3
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusWeeks(1), now) returns 3
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Limited
+        actual.status shouldEqual Limited()
       }
     }
 
@@ -133,11 +133,11 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
         val participation = RewardParticipations.participation(twiceADay, serdar)
 
         timeService.now returns now
-        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(2), now) returns 5
+        rewardParticipationRepository.countByRewardAndBeamerAndStatusBetween(participation.reward, participation.beamer, Completed(), now.minusDays(1), now) returns 5
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Limited
+        actual.status shouldEqual Limited()
       }
     }
 
@@ -154,7 +154,7 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Completed
+        actual.status shouldEqual Completed()
       }
     }
 
@@ -168,7 +168,7 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Limited
+        actual.status shouldEqual Limited()
       }
     }
 
@@ -186,7 +186,7 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Completed
+        actual.status shouldEqual Completed()
       }
     }
 
@@ -200,7 +200,7 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
 
         val actual = limiter.evaluate(participation)
 
-        actual.status shouldEqual Limited
+        actual.status shouldEqual Limited()
       }
     }
 
