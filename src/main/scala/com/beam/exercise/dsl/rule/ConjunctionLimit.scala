@@ -1,7 +1,7 @@
 package com.beam.exercise.dsl.rule
 
-case class ConjunctionLimit(terms: Seq[Limit]) extends Limit {
+case class ConjunctionLimit(left: Limit, right: Limit) extends Limit {
 
-  override def toString = s"(${terms.mkString(" and ")})"
+  override def toString = s"($left and $right)"
 
 }

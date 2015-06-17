@@ -25,7 +25,7 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
   }
 
   describe("evaluate ConjunctionLimit") {
-    val reward = Rewards.reward100(ConjunctionLimit(BeamerMaximumCyclesLimit(Day(), 2) :: BeamerMaximumCyclesLimit(Week(), 3) :: Nil))
+    val reward = Rewards.reward100(ConjunctionLimit(BeamerMaximumCyclesLimit(Day(), 2), BeamerMaximumCyclesLimit(Week(), 3)))
 
     it("completes on true true") {
       new Fixtures {

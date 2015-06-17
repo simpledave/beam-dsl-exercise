@@ -23,11 +23,10 @@ class LimitParserTest extends FunSpec with Matchers {
       val one = BeamerMaximumCyclesLimit(Day(), 2)
       val two = BeamerMaximumCyclesLimit(Week(), 3)
 
-      parser.parse(ConjunctionLimit(Seq(one, two)).toString) match {
+      parser.parse(ConjunctionLimit(one, two).toString) match {
         case Right(l: ConjunctionLimit) =>
-          l.terms.size shouldEqual 2
-          l.terms(0) shouldEqual one
-          l.terms(1) shouldEqual two
+          l.left shouldEqual one
+          l.right shouldEqual two
         case _ => fail("expected ConjunctionLimit")
       }
     }
