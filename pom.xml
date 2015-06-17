@@ -8,7 +8,42 @@
     <name>Beam DSL exercise</name>
 
     <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>1.6.2</version>
+        </dependency>
 
+        <!-- scala dependencies -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.11.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-parser-combinators_2.11</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.11</artifactId>
+            <version>2.2.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -48,6 +83,19 @@
                     <jvmArgs>
                         <jvmArg>-Xmx1024m</jvmArg>
                     </jvmArgs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- see: https://bitbucket.org/atlassian/jgit-flow -->
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>1.0-m5.1</version>
+                <configuration>
+                    <allowSnapshots>true</allowSnapshots>
+                    <pushReleases>true</pushReleases>
+                    <noDeploy>true</noDeploy>
+                    <allowUntracked>true</allowUntracked>
                 </configuration>
             </plugin>
         </plugins>
