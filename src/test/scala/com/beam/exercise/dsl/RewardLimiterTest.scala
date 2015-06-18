@@ -18,7 +18,7 @@ class RewardLimiterTest extends FunSpec with Matchers with EvenMoreSugar {
     val timeService = mock[TimeService]
     val rewardParticipationRepository = mock[RewardParticipationRepository]
 
-    val limiter = new RewardLimiter(timeService, rewardParticipationRepository)
+    val limiter = new JavaRewardLimiter(timeService, rewardParticipationRepository)
 
     val now = new DateTime(DateTimeZone.UTC)
     val serdar = Beamers.serdar

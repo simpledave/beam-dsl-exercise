@@ -5,4 +5,5 @@ import org.joda.time.DateTime
 
 case class RewardParticipation(id: Long, created: DateTime, reward: Reward, beamer: Beamer, status: RewardParticipationStatus = Started()) extends Entity {
 
+  def setStatus ( s:RewardParticipationStatus ) = this.copy(status=s)
 }
