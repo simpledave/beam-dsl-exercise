@@ -32,3 +32,23 @@ If you do not have gitflow installed you can use the maven jgitflow plugin: mvn 
 
 ### Bonus
 Implement a DisjunctionLimit
+
+
+## Class diagram
+A *BEAMER* participates in 0-n *REWARDS* 
+```
++----------+              +--------+
+|          |              |        |
+| REWARD   +----+    +----+ BEAMER |
+|  * award |    |    |    |        |
+|          |    |    |    +--------+
++----------+    |    |              
+                |    |              
+                |    |              
+      +---------+----+-------+      
+      |                      |      
+      | REWARD PARTICIPATION |      
+      |  * status            |      
+      |                      |      
+      +----------------------+      
+```
